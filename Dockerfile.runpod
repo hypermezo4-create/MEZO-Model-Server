@@ -1,0 +1,16 @@
+ARG VLLM_IMAGE=vllm/vllm-openai:v0.15.0
+FROM ${VLLM_IMAGE}
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/opt/mezo/src
+
+WORKDIR /opt/mezo
+RUN python -m pip install --no-cache-dir "runpod>=1.7,<2" "httpx>=0.28,<1"
+COPY src ./src
+COPY models ./models
+COPY runpod ./runpod
+COPY scripts ./scripts
+RUN chmod +x /opt/mezo/runpod/start.sh && mkdir -p /models
+
+CMD ["/opt/mezo/runpod/start.sh"]

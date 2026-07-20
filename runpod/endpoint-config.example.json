@@ -1,0 +1,24 @@
+{
+  "name": "mezo-qwen-coder",
+  "containerDiskInGb": 30,
+  "volumeInGb": 200,
+  "volumeMountPath": "/models",
+  "gpuCount": 2,
+  "workersMin": 0,
+  "workersMax": 2,
+  "idleTimeoutSeconds": 300,
+  "executionTimeoutMs": 900000,
+  "environment": {
+    "ENVIRONMENT": "production",
+    "MODEL_ID": "Qwen/Qwen3-Coder-Next",
+    "MODEL_REVISION": "ae92094dbc991a73c77990b5677e668215d4fa34",
+    "SERVED_MODEL_NAME": "qwen-coder-primary",
+    "MAX_MODEL_LEN": "32768",
+    "TENSOR_PARALLEL_SIZE": "2",
+    "MAX_NUM_SEQS": "2",
+    "GPU_MEMORY_UTILIZATION": "0.90",
+    "TOOL_CALL_PARSER": "qwen3_coder",
+    "TRUST_REMOTE_CODE": "false",
+    "DISABLE_LOG_REQUESTS": "true"
+  }
+}

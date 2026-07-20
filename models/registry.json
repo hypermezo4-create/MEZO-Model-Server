@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "models": {
+    "qwen-coder-primary": {
+      "model_id": "Qwen/Qwen3-Coder-Next",
+      "revision": "ae92094dbc991a73c77990b5677e668215d4fa34",
+      "engine": "vllm",
+      "minimum_engine_version": "0.15.0",
+      "served_model_name": "qwen-coder-primary",
+      "max_context": 262144,
+      "default_context": 32768,
+      "tool_call_parser": "qwen3_coder"
+    }
+  }
+}

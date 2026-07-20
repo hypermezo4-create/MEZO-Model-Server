@@ -1,0 +1,33 @@
+name: Remote Benchmark
+
+on:
+  workflow_dispatch:
+    inputs:
+      requests:
+        description: Number of sequential latency requests
+        required: true
+        default: "5"
+
+permissions:
+  contents: read
+
+jobs:
+  benchmark:
+    environment: model-benchmark
+    runs-on: ubuntu-latest
+    env:
+      MODEL_BASE_URL: ${{ secrets.MODEL_BASE_URL }}
+      MODEL_API_KEY: ${{ secrets.MODEL_API_KEY }}
+      SERVED_MODEL_NAME: qwen-coder-primary
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/smoke_test.py
+      - run: python scripts/tool_call_test.py
+      - run: python benchmarks/latency.py --requests '${{ inputs.requests }}' | tee benchmark.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: model-benchmark-${{ github.sha }}
+          path: benchmark.json
